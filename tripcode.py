@@ -5,7 +5,7 @@ from base64 import b64encode
 from hashlib import sha1
 
 
-def generate_trip(tripstr):
+def generate_trip(tripstr: str) -> str:
     '''
     >>> generate_trip('#istrip')
     u'\u25c6/WG5qp963c'
