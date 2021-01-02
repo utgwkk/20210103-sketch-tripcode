@@ -28,7 +28,7 @@ def generate_trip(tripstr: str) -> str:
         salt = (tripkey + 'H.')[1:3]
         salt = re.sub(r'[^\.-z]', '.', salt)
         salt = salt.translate(str.maketrans(':;<=>?@[\\]^_`', 'ABCDEFGabcdef'))
-        trip = crypt(tripkey, salt)
+        trip = crypt(tripkey.encode('utf-8').decode('shift-jis'), salt)
         trip = trip[-10:]
     trip = '◆' + trip
 
