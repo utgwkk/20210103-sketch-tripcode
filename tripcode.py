@@ -25,10 +25,12 @@ def generate_trip(tripstr: str) -> str:
             trip = trip.replace('+', '.')
     else:
         tripkey = tripstr[1:]
-        salt = (tripkey + 'H.')[1:3]
-        salt = re.sub(r'[^\.-z]', '.', salt)
-        salt = salt.translate(str.maketrans(':;<=>?@[\\]^_`', 'ABCDEFGabcdef'))
-        trip = crypt(tripkey.encode('utf-8').decode('shift-jis'), salt)
+        # treat as Shift-JIS bytes
+        tripkey = bytes(tripkey, encoding='shift-jis')
+        salt = (tripkey + b'H.')[1:3]
+        salt = re.sub(rb'[^\.-z]', b'.', salt)
+        salt = salt.translate(bytes.maketrans(b':;<=>?@[\\]^_`', b'ABCDEFGabcdef'))
+        trip = crypt(tripkey.decode('shift-jis'), salt.decode('shift-jis'))
         trip = trip[-10:]
     trip = '◆' + trip
 
