@@ -1,5 +1,4 @@
 import re
-import string
 from crypt import crypt
 from base64 import b64encode
 from hashlib import sha1
@@ -28,13 +27,12 @@ def generate_trip(tripstr: str) -> str:
         tripkey = tripstr[1:]
         salt = (tripkey + 'H.')[1:3]
         salt = re.sub(r'[^\.-z]', '.', salt)
-        salt = salt.translate(string.maketrans(':;<=>?@[\\]^_`', 'ABCDEFGabcdef'))
+        salt = salt.translate(str.maketrans(':;<=>?@[\\]^_`', 'ABCDEFGabcdef'))
         trip = crypt(tripkey, salt)
         trip = trip[-10:]
     trip = '◆' + trip
 
-    retval = unicode(trip, encoding='shift-jis')
-    return retval
+    return trip
 
 
 if __name__ == '__main__':
