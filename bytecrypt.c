@@ -2,6 +2,10 @@
 #include <crypt.h>
 #include <Python.h>
 
+/* ref:
+ * - https://github.com/python/cpython/blob/f7f0ed59bcc41ed20674d4b2aa443d3b79e725f4/Modules/_cryptmodule.c
+ * - https://github.com/python/cpython/blob/f7f0ed59bcc41ed20674d4b2aa443d3b79e725f4/Modules/clinic/_cryptmodule.c.h
+ */
 static PyObject* bytecrypt (PyObject *module, PyObject *const *args, Py_ssize_t nargs) {
     PyObject *return_value = NULL;
     const char *word, *salt, *crypted;

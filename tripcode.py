@@ -7,9 +7,21 @@ from hashlib import sha1
 def generate_trip(tripstr: str) -> str:
     '''
     >>> generate_trip('#istrip')
-    '\u25c6/WG5qp963c'
+    '◆/WG5qp963c'
     >>> generate_trip('#ニコニコ')
-    '\u25c6pA8Bpf.Qvk'
+    '◆pA8Bpf.Qvk'
+
+    (from https://w.atwiki.jp/aaaaaaaaaasaaaa/pages/11.html)
+    >>> generate_trip('#t%{rｼ)L,')
+    '◆HAckEr.Tac'
+    >>> generate_trip('#DRL諞Qq@')
+    '◆AAAAAAAc.s'
+    >>> generate_trip('#JM@/!詫8')
+    '◆GoGoGO/Bos'
+    >>> generate_trip('#s0ﾝX[aF-')
+    '◆1uzee/wmbQ'
+    >>> generate_trip('#ｩ.N避y承')
+    '◆4/9.......'
     '''
     if len(tripstr[1:]) >= 12:
         mark = tripstr[0]
