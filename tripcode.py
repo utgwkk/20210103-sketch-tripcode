@@ -22,6 +22,8 @@ def generate_trip(tripstr: str) -> str:
     '◆1uzee/wmbQ'
     >>> generate_trip('#ｩ.N避y承')
     '◆4/9.......'
+    >>> generate_trip('#DRL諞Qq@')
+    '◆AAAAAAAc.s'
     '''
     if len(tripstr[1:]) >= 12:
         mark = tripstr[0]
