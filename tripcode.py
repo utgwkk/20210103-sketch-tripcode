@@ -1,5 +1,5 @@
 import re
-from crypt import crypt
+import bytecrypt
 from base64 import b64encode
 from hashlib import sha1
 
@@ -16,7 +16,7 @@ def generate_trip(tripstr: str) -> str:
         if mark == '#' or mark == '$':
             m = re.match(r'^#([0-9a-fA-F]{16})([\./0-9A-Za-z]{0,2})$', tripstr)
             if m:
-                trip = crypt(str(int(m.group(1))), m.group(2) + '..')[-10:]
+                trip = bytecrypt.crypt(bytes(int(m.group(1)), 'shift-jis'), m.group(2).encode('shift-jis') + b'..')[-10:]
             else:
                 trip = '???'
         else:
@@ -30,9 +30,9 @@ def generate_trip(tripstr: str) -> str:
         salt = (tripkey + b'H.')[1:3]
         salt = re.sub(rb'[^\.-z]', b'.', salt)
         salt = salt.translate(bytes.maketrans(b':;<=>?@[\\]^_`', b'ABCDEFGabcdef'))
-        trip = crypt(tripkey.decode('shift-jis'), salt.decode('shift-jis'))
+        trip = bytecrypt.crypt(tripkey, salt)
         trip = trip[-10:]
-    trip = '◆' + trip
+    trip = '◆' + trip.decode('shift-jis')
 
     return trip
 
